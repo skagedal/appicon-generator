@@ -40,6 +40,10 @@ extension IconVariant {
         // Ugh.
         return Int(round(scale.number * CGFloat(Double(sizeInPoints)!)))
     }
+    
+    func filename(base: String) -> String {
+        return "\(base)-\(sizeInPixels).png"
+    }
 }
 
 // MARK: - Contents.json specific
@@ -68,7 +72,7 @@ extension AppIconSet {
             
             return AppIconSetImage(size: "\(points)x\(points)",
                                    idiom: variant.idiom,
-                                   filename: "\(baseFilename)-\(variant.sizeInPixels)", scale: variant.scale)
+                                   filename: variant.filename(base: baseFilename), scale: variant.scale)
         }), info: AppIconSetInfo())
     }
 }

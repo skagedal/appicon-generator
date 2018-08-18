@@ -4,7 +4,7 @@
 
 import Foundation
 
-private let variants: [IconVariant] = [
+private let allVariants: [IconVariant] = [
     IconVariant(idiom: .iphone, sizeInPoints: "20", scale: .twoX),
     IconVariant(idiom: .iphone, sizeInPoints: "20", scale: .threeX),
     IconVariant(idiom: .iphone, sizeInPoints: "29", scale: .twoX),
@@ -36,7 +36,9 @@ class AppIconSetGenerator {
     
     func createAppIconSet(in directory: URL) throws {
         let iconsetDirectory = try createdIconSetDirectory(at: directory.appendingPathComponent("AppIcon.appiconset"))
-        try writeContentsJson(to: iconsetDirectory.appendingPathComponent("Contents.json"))
+        let baseFilename = "icon"
+        try writeContentsJson(from: allVariants, baseFilename: baseFilename, to: iconsetDirectory.appendingPathComponent("Contents.json"))
+        try writeUniqueIcons(from: allVariants, baseFilename: baseFilename, in: iconsetDirectory)
     }
     
     func createdIconSetDirectory(at directory: URL) throws -> URL {
@@ -48,11 +50,33 @@ class AppIconSetGenerator {
         return directory
     }
     
-    func writeContentsJson(to url: URL) throws {
-        let appIconSet = AppIconSet(baseFilename: "icon", variants: variants)
+    func writeContentsJson(from variants: [IconVariant], baseFilename: String, to url: URL) throws {
+        let appIconSet = AppIconSet(baseFilename: baseFilename, variants: variants)
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try encoder.encode(appIconSet)
         try data.write(to: url)
+    }
+    
+    func writeUniqueIcons(from variants: [IconVariant], baseFilename: String, in directory: URL) throws {
+        let uniqueIcons = Set(variants.map(PixelSizeUniqueIconVariant.init(variant:)))
+        for icon in uniqueIcons {
+            let pixels = icon.variant.sizeInPixels
+            let data = try iconRenderer.render(sizeInPixels: pixels)
+            let url = directory.appendingPathComponent(icon.variant.filename(base: baseFilename))
+            try data.write(to: url)
+        }
+    }
+}
+
+private struct PixelSizeUniqueIconVariant: Equatable, Hashable {
+    let variant: IconVariant
+
+    static func == (lhs: PixelSizeUniqueIconVariant, rhs: PixelSizeUniqueIconVariant) -> Bool {
+        return lhs.variant.sizeInPixels == rhs.variant.sizeInPixels
+    }
+    
+    var hashValue: Int {
+        return variant.sizeInPixels.hashValue
     }
 }
