@@ -8,3 +8,7 @@ guard let text = ProcessInfo.processInfo.arguments.dropFirst().first else {
 let renderer = IconRenderer(text: text, backgroundColor: .white)
 let data = try renderer.render(sizeInPixels: 100)
 try data.write(to: URL(fileURLWithPath: "icon100.png"))
+
+let generator = AppIconSetGenerator(iconRenderer: renderer)
+let currentDirectory = URL(fileURLWithPath: "")
+try generator.createAppIconSet(in: currentDirectory)
