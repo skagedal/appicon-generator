@@ -34,11 +34,12 @@ class AppIconSetGenerator {
         self.fileManager = fileManager
     }
     
-    func createAppIconSet(in directory: URL) throws {
+    func createAppIconSet(in directory: URL) throws -> URL {
         let iconsetDirectory = try createdIconSetDirectory(at: directory.appendingPathComponent("AppIcon.appiconset"))
         let baseFilename = "icon"
         try writeContentsJson(from: allVariants, baseFilename: baseFilename, to: iconsetDirectory.appendingPathComponent("Contents.json"))
         try writeUniqueIcons(from: allVariants, baseFilename: baseFilename, in: iconsetDirectory)
+        return iconsetDirectory
     }
     
     func createdIconSetDirectory(at directory: URL) throws -> URL {
