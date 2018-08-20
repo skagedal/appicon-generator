@@ -1,4 +1,5 @@
 import AppKit
+import AppIconGeneratorCore
 
 guard let text = ProcessInfo.processInfo.arguments.dropFirst().first else {
     print("Please call with the text for the icon as an argument")

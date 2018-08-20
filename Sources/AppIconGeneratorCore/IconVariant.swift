@@ -4,19 +4,19 @@
 
 import Foundation
 
-struct IconVariant {
+internal struct IconVariant {
     let idiom: AppIconIdiom
     let sizeInPoints: String
     let scale: AppIconScale
 }
 
-enum AppIconIdiom: String, Codable {
+internal enum AppIconIdiom: String, Codable {
     case iphone = "iphone"
     case ipad = "ipad"
     case iosMarketing = "ios-marketing"
 }
 
-enum AppIconScale: String, Encodable {
+internal enum AppIconScale: String, Encodable {
     case oneX = "1x"
     case twoX = "2x"
     case threeX = "3x"
@@ -48,19 +48,19 @@ extension IconVariant {
 
 // MARK: - Contents.json specific
 
-struct AppIconSetImage: Encodable {
+internal struct AppIconSetImage: Encodable {
     let size: String
     let idiom: AppIconIdiom
     let filename: String
     let scale: AppIconScale
 }
 
-struct AppIconSetInfo: Encodable {
+internal struct AppIconSetInfo: Encodable {
     let version: Int = 1
     let author: String = "appicon-generator"
 }
 
-struct AppIconSet: Encodable {
+internal struct AppIconSet: Encodable {
     let images: [AppIconSetImage]
     let info: AppIconSetInfo
 }

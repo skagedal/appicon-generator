@@ -25,16 +25,16 @@ private let allVariants: [IconVariant] = [
     IconVariant(idiom: .iosMarketing, sizeInPoints: "1024", scale: .oneX)
 ]
 
-class AppIconSetGenerator {
-    let iconRenderer: IconRenderer
-    let fileManager: FileManager
+public class AppIconSetGenerator {
+    private let iconRenderer: IconRenderer
+    private let fileManager: FileManager
     
-    init(iconRenderer: IconRenderer, fileManager: FileManager = FileManager.default) {
+    public init(iconRenderer: IconRenderer, fileManager: FileManager = FileManager.default) {
         self.iconRenderer = iconRenderer
         self.fileManager = fileManager
     }
     
-    func createAppIconSet(in directory: URL) throws -> URL {
+    public func createAppIconSet(in directory: URL) throws -> URL {
         let iconsetDirectory = try createdIconSetDirectory(at: directory.appendingPathComponent("AppIcon.appiconset"))
         let baseFilename = "icon"
         try writeContentsJson(from: allVariants, baseFilename: baseFilename, to: iconsetDirectory.appendingPathComponent("Contents.json"))
@@ -42,7 +42,7 @@ class AppIconSetGenerator {
         return iconsetDirectory
     }
     
-    func createdIconSetDirectory(at directory: URL) throws -> URL {
+    private func createdIconSetDirectory(at directory: URL) throws -> URL {
         do {
             try fileManager.createDirectory(at: directory, withIntermediateDirectories: false, attributes: [:])
         } catch CocoaError.fileWriteFileExists {
@@ -51,7 +51,7 @@ class AppIconSetGenerator {
         return directory
     }
     
-    func writeContentsJson(from variants: [IconVariant], baseFilename: String, to url: URL) throws {
+    private func writeContentsJson(from variants: [IconVariant], baseFilename: String, to url: URL) throws {
         let appIconSet = AppIconSet(baseFilename: baseFilename, variants: variants)
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
@@ -59,7 +59,7 @@ class AppIconSetGenerator {
         try data.write(to: url)
     }
     
-    func writeUniqueIcons(from variants: [IconVariant], baseFilename: String, in directory: URL) throws {
+    private func writeUniqueIcons(from variants: [IconVariant], baseFilename: String, in directory: URL) throws {
         let uniqueIcons = Set(variants.map(PixelSizeUniqueIconVariant.init(variant:)))
         for icon in uniqueIcons {
             let pixels = icon.variant.sizeInPixels

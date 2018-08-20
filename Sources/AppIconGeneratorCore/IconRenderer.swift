@@ -4,8 +4,8 @@
 
 import Cocoa
 
-class IconRenderer {
-    enum Error: Swift.Error {
+public class IconRenderer {
+    public enum Error: Swift.Error {
         case couldNotCreateBitmapImage
         case couldNotCreatePNGRepresentation
     }
@@ -13,12 +13,12 @@ class IconRenderer {
     let text: String
     let backgroundColor: NSColor
     
-    init(text: String, backgroundColor: NSColor) {
+    public init(text: String, backgroundColor: NSColor) {
         self.text = text
         self.backgroundColor = backgroundColor
     }
     
-    func render(sizeInPixels: Int) throws -> Data {
+    public func render(sizeInPixels: Int) throws -> Data {
         guard let imageRep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: sizeInPixels, pixelsHigh: sizeInPixels, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .calibratedRGB, bytesPerRow: 0, bitsPerPixel: 0) else {
             throw Error.couldNotCreateBitmapImage
         }
