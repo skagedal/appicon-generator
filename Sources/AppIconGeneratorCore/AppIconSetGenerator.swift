@@ -25,13 +25,16 @@ private let allVariants: [IconVariant] = [
     IconVariant(idiom: .iosMarketing, sizeInPoints: "1024", scale: .oneX)
 ]
 
+public protocol IconRenderer {
+    func render(sizeInPixels: Int) throws -> Data
+}
+
 public class AppIconSetGenerator {
     private let iconRenderer: IconRenderer
-    private let fileManager: FileManager
+    private let fileManager: FileManager = FileManager.default
     
-    public init(iconRenderer: IconRenderer, fileManager: FileManager = FileManager.default) {
+    public init(iconRenderer: IconRenderer) {
         self.iconRenderer = iconRenderer
-        self.fileManager = fileManager
     }
     
     public func createAppIconSet(in directory: URL) throws -> URL {

@@ -6,7 +6,7 @@ guard let text = ProcessInfo.processInfo.arguments.dropFirst().first else {
     exit(1)
 }
 
-let renderer = IconRenderer(text: text, backgroundColor: .white)
+let renderer = EmojiIconRenderer(text: text, backgroundColor: .white)
 let generator = AppIconSetGenerator(iconRenderer: renderer)
 let currentDirectory = URL(fileURLWithPath: "")
 let chosenDirectory = try FileManager.default.findAssets(in: currentDirectory) ?? currentDirectory

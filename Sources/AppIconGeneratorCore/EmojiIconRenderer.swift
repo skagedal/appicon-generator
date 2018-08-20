@@ -4,7 +4,7 @@
 
 import Cocoa
 
-public class IconRenderer {
+public class EmojiIconRenderer: IconRenderer {
     public enum Error: Swift.Error {
         case couldNotCreateBitmapImage
         case couldNotCreatePNGRepresentation
