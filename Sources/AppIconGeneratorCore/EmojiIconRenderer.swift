@@ -33,7 +33,7 @@ public class EmojiIconRenderer: IconRenderer {
         
         let rect = string.boundingRect(with: imageSize, options: [], attributes: attributes)
         
-        NSColor.white.setFill()
+        backgroundColor.setFill()
         NSRect(x: 0, y: 0, width: width, height: width).fill()
         string.draw(in: NSRect(x: width / 2 - rect.width / 2,
                                y: width / 2 - rect.size.height / 2 ,
