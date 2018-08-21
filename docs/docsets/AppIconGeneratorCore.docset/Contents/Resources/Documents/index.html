@@ -83,10 +83,10 @@
 <p>You can also use it in combination with <code><a href="Classes/AppIconSetGenerator.html">AppIconSetGenerator</a></code> to generate a full set of icons.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">generator</span> <span class="o">=</span> <span class="kt">AppIconSetGenerator</span><span class="p">(</span><span class="nv">iconRenderer</span><span class="p">:</span> <span class="n">iconRenderer</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">currentDirectory</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">fileURLWithPath</span><span class="p">:</span> <span class="s">""</span><span class="p">)</span>
-<span class="k">try</span> <span class="n">generator</span><span class="o">..</span><span class="nf">createAppIconSet</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="n">currentDirectory</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">generator</span><span class="o">.</span><span class="nf">createAppIconSet</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="n">currentDirectory</span><span class="p">)</span>
 </code></pre>
 
-<p>You can also pass in your own icon render conforming to <code><a href="Protocols/IconRenderer.html">IconRenderer</a></code>.</p>
+<p>You can also pass in your own icon renderer by conforming to the <code><a href="Protocols/IconRenderer.html">IconRenderer</a></code> protocol.</p>
 
           </section>
         </section>
