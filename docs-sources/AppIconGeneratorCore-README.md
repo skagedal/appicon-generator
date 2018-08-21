@@ -34,7 +34,7 @@ You can also use it in combination with `AppIconSetGenerator` to generate a full
 ```swift
 let generator = AppIconSetGenerator(iconRenderer: iconRenderer)
 let currentDirectory = URL(fileURLWithPath: "")
-try generator..createAppIconSet(in: currentDirectory)
+try generator.createAppIconSet(in: currentDirectory)
 ```
 
 You can also pass in your own icon renderer by conforming to the `IconRenderer` protocol.
