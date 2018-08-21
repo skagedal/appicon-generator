@@ -14,6 +14,7 @@
     <header>
       <div class="content-wrapper">
         <p><a href="index.html">AppIconGeneratorCore Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="http://github.com/skagedal/appicon-generator/"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -54,36 +55,43 @@
         <section>
           <section class="section">
             
-            <h1 id='appicon-generator' class='heading'>appicon-generator</h1>
+            <h1 id='appicongeneratorcore' class='heading'>AppIconGeneratorCore</h1>
 
-<p><em>A tool to quickly generate snazzy iOS placeholder appicons!</em></p>
-
-<p>If you&rsquo;re an iOS developer like me, chances are that you also create tiny iOS app projects in Xcode all the time. Maybe it&rsquo;s an idea you&rsquo;d like to try out, a toy for experimenting with a new iOS feature, maybe it&rsquo;s a micro-tool, maybe it&rsquo;s the alpha version of the next App Store blockbuster. </p>
-
-<p>Suddenly your iOS simulators and your phone has a whole bunch of apps with the placeholder icon. That&rsquo;s not very nice. You don&rsquo;t have time for that. You&rsquo;re not a designer.  You don&rsquo;t have Sketch. You just want something that looks ok for now. </p>
-
-<p>Here&rsquo;s a tool that quickly generates app icons from a big set of beautifully crafted icons that are already on your computer.  Open a shell, <code>cd</code> to your project directory and type:</p>
-<pre class="highlight shell"><code><span class="nv">$ </span>appicon-generator 🐘
+<p>This is a framework that supports the <a href="https://github.com/skagedal/appicon-generator/">appicon-generator</a> tool. It can also be used independently. Using Swift Package Manager, your package definition may look a little something like this:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="s">"my-tool"</span><span class="p">,</span>
+    <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/skagedal/appicon-generator/"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"1.0.0"</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="nv">targets</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">.</span><span class="nf">target</span><span class="p">(</span>
+            <span class="nv">name</span><span class="p">:</span> <span class="s">"my-tool"</span><span class="p">,</span>
+            <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"AppIconGeneratorCore"</span><span class="p">])</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 </code></pre>
 
-<p>Now you have an elephant as an appicon. <em>Nice.</em></p>
-<h2 id='installation' class='heading'>Installation</h2>
+<p>Then you can import the framework in your code.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">AppIconGeneratorCore</span>
+</code></pre>
 
-<p>Grab the zip from the releases page on Github, unzip and move <code>appicon-generator</code> into <code>/usr/local/bin</code> (or some other place you like to keep your binaries). </p>
-<h2 id='caveats' class='heading'>Caveats</h2>
+<p>You use <code><a href="Classes/EmojiIconRenderer.html">EmojiIconRenderer</a></code> to render a single emoji icon as a PNG.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">iconRenderer</span> <span class="o">=</span> <span class="kt">EmojiIconRenderer</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="s">"😺"</span><span class="p">,</span> <span class="nv">backgroundColor</span><span class="p">:</span> <span class="o">.</span><span class="n">white</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="k">try</span> <span class="n">iconRenderer</span><span class="o">.</span><span class="nf">renderPNG</span><span class="p">(</span><span class="nv">sizeInPixels</span><span class="p">:</span> <span class="mi">50</span><span class="p">)</span>
+</code></pre>
 
-<ul>
-<li><code>appicon-generator</code> will look for an <code>Assets.xcassets</code> directory, in the directory you&rsquo;re at or most one level down, and then generate an <code>AppIcon.appiconset</code> there, <strong>overwriting any existing data without asking</strong>. Commit your data if needed before using.</li>
-<li>Obviously, don&rsquo;t try to commit an app with an emoji as an icon to the App Store. They won&rsquo;t like that.</li>
-</ul>
-<h2 id='build-instructions' class='heading'>Build instructions</h2>
+<p>You can also use it in combination with <code><a href="Classes/AppIconSetGenerator.html">AppIconSetGenerator</a></code> to generate a full set of icons.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">generator</span> <span class="o">=</span> <span class="kt">AppIconSetGenerator</span><span class="p">(</span><span class="nv">iconRenderer</span><span class="p">:</span> <span class="n">iconRenderer</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">currentDirectory</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">fileURLWithPath</span><span class="p">:</span> <span class="s">""</span><span class="p">)</span>
+<span class="k">try</span> <span class="n">generator</span><span class="o">..</span><span class="nf">createAppIconSet</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="n">currentDirectory</span><span class="p">)</span>
+</code></pre>
 
-<p>To build the tool, use <code>swift build</code>.  Make sure to have your <code>xcode-select</code> version to Xcode 10 – as of this writing, I am using the beta 6 version. </p>
+<p>You can also pass in your own icon render conforming to <code><a href="Protocols/IconRenderer.html">IconRenderer</a></code>.</p>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2018-08-21)</p>
+          <p>&copy; 2018 <a class="link" href="http://skagedal.tech" target="_blank" rel="external">Simon Kågedal Reimer</a>. All rights reserved. (Last updated: 2018-08-21)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
