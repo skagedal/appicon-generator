@@ -25,18 +25,38 @@ private let allVariants: [IconVariant] = [
     IconVariant(idiom: .iosMarketing, sizeInPoints: "1024", scale: .oneX)
 ]
 
+/// Something that renders a single icon.
 public protocol IconRenderer {
-    func render(sizeInPixels: Int) throws -> Data
+    /// Conform to this and render an icon.  Give it to an `AppIconSetGenerator` to generate a full set
+    /// of icons.
+    ///
+    /// - Parameter sizeInPixels: The width/height in pixels.  Icons are quadratic.
+    /// - Returns: An icon rendered as PNG.
+    /// - Throws: Any error. 
+    func renderPNG(sizeInPixels: Int) throws -> Data
 }
 
+/// Use `AppIconSetGenerator` to generate a complete set of app icons, including the Contents.json
+/// file, given and `IconRenderer`.
+///
+/// Try using it with an `EmojiIconRenderer`. 
 public class AppIconSetGenerator {
     private let iconRenderer: IconRenderer
     private let fileManager: FileManager = FileManager.default
     
+    /// - Parameter iconRenderer: The object responsible for rendering individual icons.
     public init(iconRenderer: IconRenderer) {
         self.iconRenderer = iconRenderer
     }
     
+    /// Create an app icon set.  Any existing files `AppIcon.appiconset` at the given location will be overwritten.
+    /// However, unreferenced image files might be left around – so you might want to just check for any existing
+    /// `AppIcon.appiconset` and delete it first if that's what you want.
+    ///
+    /// - Parameter directory: The `AppIcon.appiconset` will be placed here.
+    /// - Returns: The URL of the created `AppIcon.appiconset`.
+    /// - Throws: Any file management errors or rethrown errors from your `IconRenderer`.
+    @discardableResult
     public func createAppIconSet(in directory: URL) throws -> URL {
         let iconsetDirectory = try createdIconSetDirectory(at: directory.appendingPathComponent("AppIcon.appiconset"))
         let baseFilename = "icon"
@@ -66,7 +86,7 @@ public class AppIconSetGenerator {
         let uniqueIcons = Set(variants.map(PixelSizeUniqueIconVariant.init(variant:)))
         for icon in uniqueIcons {
             let pixels = icon.variant.sizeInPixels
-            let data = try iconRenderer.render(sizeInPixels: pixels)
+            let data = try iconRenderer.renderPNG(sizeInPixels: pixels)
             let url = directory.appendingPathComponent(icon.variant.filename(base: baseFilename))
             try data.write(to: url)
         }

@@ -14,7 +14,7 @@
     <a title="EmojiIconRenderer Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">AppIconGeneratorCore Docs</a> (0% documented)</p>
+        <p><a href="../index.html">AppIconGeneratorCore Docs</a> (100% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -61,7 +61,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>A class to render emoji icons.</p>
 
           </section>
           <section class="section task-group-section">
@@ -80,7 +80,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Errors thrown by <code><a href="../Classes/EmojiIconRenderer.html">EmojiIconRenderer</a></code>.</p>
 
                         <a href="../Classes/EmojiIconRenderer/Error.html" class="slightly-smaller">See more</a>
                       </div>
@@ -108,7 +108,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Create an Emoji icon renderer.</p>
 
                       </div>
                       <div class="declaration">
@@ -119,15 +119,46 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>May actually be any string, but a single emoji will work best.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>backgroundColor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Color to fill the background of the icon.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20AppIconGeneratorCore05EmojiB8RendererC6render12sizeInPixels10Foundation4DataVSi_tKF"></a>
-                    <a name="//apple_ref/swift/Method/render(sizeInPixels:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20AppIconGeneratorCore05EmojiB8RendererC6render12sizeInPixels10Foundation4DataVSi_tKF">render(sizeInPixels:)</a>
+                    <a name="/s:20AppIconGeneratorCore05EmojiB8RendererC9renderPNG12sizeInPixels10Foundation4DataVSi_tKF"></a>
+                    <a name="//apple_ref/swift/Method/renderPNG(sizeInPixels:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20AppIconGeneratorCore05EmojiB8RendererC9renderPNG12sizeInPixels10Foundation4DataVSi_tKF">renderPNG(sizeInPixels:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -135,16 +166,44 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Renders the specified emoji icon.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    May throw one of the <code><a href="../Classes/EmojiIconRenderer/Error.html">EmojiIconRenderer.Error</a></code> errors.
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">render</span><span class="p">(</span><span class="nv">sizeInPixels</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">renderPNG</span><span class="p">(</span><span class="nv">sizeInPixels</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sizeInPixels</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Width/height.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>PNG.</p>
                       </div>
                     </section>
                   </div>

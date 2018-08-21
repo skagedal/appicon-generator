@@ -4,21 +4,37 @@
 
 import Cocoa
 
+/// A class to render emoji icons.
 public class EmojiIconRenderer: IconRenderer {
+    /// Errors thrown by `EmojiIconRenderer`.
     public enum Error: Swift.Error {
+        /// Creation of bitmap failed for some reason.
         case couldNotCreateBitmapImage
+        /// Rendering into PNG failed for some reason.
         case couldNotCreatePNGRepresentation
     }
 
+    /// Text to render.
     let text: String
+    /// Background color to render.
     let backgroundColor: NSColor
     
+    /// Create an Emoji icon renderer.
+    ///
+    /// - Parameters:
+    ///   - text: May actually be any string, but a single emoji will work best.
+    ///   - backgroundColor: Color to fill the background of the icon.
     public init(text: String, backgroundColor: NSColor) {
         self.text = text
         self.backgroundColor = backgroundColor
     }
     
-    public func render(sizeInPixels: Int) throws -> Data {
+    /// Renders the specified emoji icon.
+    ///
+    /// - Parameter sizeInPixels: Width/height.
+    /// - Returns: PNG.
+    /// - Throws: May throw one of the `EmojiIconRenderer.Error` errors. 
+    public func renderPNG(sizeInPixels: Int) throws -> Data {
         guard let imageRep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: sizeInPixels, pixelsHigh: sizeInPixels, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .calibratedRGB, bytesPerRow: 0, bitsPerPixel: 0) else {
             throw Error.couldNotCreateBitmapImage
         }

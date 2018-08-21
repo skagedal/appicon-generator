@@ -14,7 +14,7 @@
     <a title="IconRenderer Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">AppIconGeneratorCore Docs</a> (0% documented)</p>
+        <p><a href="../index.html">AppIconGeneratorCore Docs</a> (100% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -61,7 +61,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Something that renders a single icon.</p>
 
           </section>
           <section class="section task-group-section">
@@ -70,9 +70,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20AppIconGeneratorCore0B8RendererP6render12sizeInPixels10Foundation4DataVSi_tKF"></a>
-                    <a name="//apple_ref/swift/Method/render(sizeInPixels:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20AppIconGeneratorCore0B8RendererP6render12sizeInPixels10Foundation4DataVSi_tKF">render(sizeInPixels:)</a>
+                    <a name="/s:20AppIconGeneratorCore0B8RendererP9renderPNG12sizeInPixels10Foundation4DataVSi_tKF"></a>
+                    <a name="//apple_ref/swift/Method/renderPNG(sizeInPixels:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20AppIconGeneratorCore0B8RendererP9renderPNG12sizeInPixels10Foundation4DataVSi_tKF">renderPNG(sizeInPixels:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -80,16 +80,45 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Conform to this and render an icon.  Give it to an <code><a href="../Classes/AppIconSetGenerator.html">AppIconSetGenerator</a></code> to generate a full set
+of icons.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Any error.
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">render</span><span class="p">(</span><span class="nv">sizeInPixels</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">renderPNG</span><span class="p">(</span><span class="nv">sizeInPixels</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sizeInPixels</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The width/height in pixels.  Icons are quadratic.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An icon rendered as PNG.</p>
                       </div>
                     </section>
                   </div>
