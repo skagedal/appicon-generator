@@ -17,9 +17,19 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "AppIconKit"),
-       .target(
-           name: "appicon-generator",
-           dependencies: ["AppIconKit"])
+            name: "AppIconKit"
+        ),
+        .target(
+            name: "AppIconGeneratorCore",
+            dependencies: ["AppIconKit"]
+        ),
+        .target(
+            name: "appicon-generator",
+            dependencies: ["AppIconKit", "AppIconGeneratorCore"]
+        ),
+        .testTarget(
+            name: "AppIconGeneratorTests",
+            dependencies: ["AppIconKit", "AppIconGeneratorCore"]
+        )
     ]
 )

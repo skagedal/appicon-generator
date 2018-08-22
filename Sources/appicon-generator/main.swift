@@ -1,14 +1,29 @@
 import AppKit
 import AppIconKit
+import AppIconGeneratorCore
 
-guard let text = ProcessInfo.processInfo.arguments.dropFirst().first else {
-    print("Please call with the text for the icon as an argument")
-    exit(1)
+func run(with arguments: ProcessArguments) throws {
+    let text = arguments.drawingCommands.compactMap({ command -> String? in
+        if case let DrawingCommand.emoji(text: text) = command {
+            return text
+        } else {
+            return nil
+        }
+    })[0]
+
+    let renderer = EmojiIconRenderer(text: text, backgroundColor: .white)
+    let generator = AppIconSetGenerator(iconRenderer: renderer)
+    let currentDirectory = URL(fileURLWithPath: "")
+    let chosenDirectory = try FileManager.default.findAssets(in: currentDirectory) ?? currentDirectory
+    let appIconSetDirectory = try generator.createAppIconSet(in: chosenDirectory, for: arguments.idioms)
+    print("Icon set generated: \(appIconSetDirectory.relativePath)")
 }
 
-let renderer = EmojiIconRenderer(text: text, backgroundColor: .white)
-let generator = AppIconSetGenerator(iconRenderer: renderer)
-let currentDirectory = URL(fileURLWithPath: "")
-let chosenDirectory = try FileManager.default.findAssets(in: currentDirectory) ?? currentDirectory
-let appIconSetDirectory = try generator.createAppIconSet(in: chosenDirectory)
-print("Icon set generated: \(appIconSetDirectory.relativePath)")
+let parser = ProcessArgumentParser()
+do {
+    let arguments = try parser.parse(ProcessInfo.processInfo.arguments)
+    try run(with: arguments)
+} catch {
+    print(error.localizedDescription)
+    exit(1)
+}
