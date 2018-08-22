@@ -1,4 +1,4 @@
-# AppIconGeneratorCore
+# AppIconKit
 
 This is a framework that supports the [appicon-generator](https://github.com/skagedal/appicon-generator/) tool. It can also be used independently. Using Swift Package Manager, your package definition may look a little something like this:
 
@@ -19,7 +19,7 @@ let package = Package(
 Then you can import the framework in your code.
 
 ```swift
-import AppIconGeneratorCore
+import AppIconKit
 ```
 
 You use `EmojiIconRenderer` to render a single emoji icon as a PNG.

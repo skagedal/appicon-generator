@@ -14,13 +14,13 @@
     <a title="AppIconSetGenerator Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">AppIconGeneratorCore Docs</a> (100% documented)</p>
+        <p><a href="../index.html">AppIconKit Docs</a> (76% documented)</p>
         <p class="header-right"><a href="http://github.com/skagedal/appicon-generator/"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
-        <a href="../index.html">AppIconGeneratorCore Reference</a>
+        <a href="../index.html">AppIconKit Reference</a>
         <img id="carat" src="../img/carat.png" />
         AppIconSetGenerator Class Reference
       </p>
@@ -50,6 +50,14 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AppIconIdioms.html">AppIconIdioms</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -74,9 +82,9 @@ file, given and <code><a href="../Protocols/IconRenderer.html">IconRenderer</a><
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20AppIconGeneratorCore0ab3SetC0C12iconRendererAcA0bG0_p_tcfc"></a>
+                    <a name="/s:10AppIconKit0aB12SetGeneratorC12iconRendererAcA0bG0_p_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(iconRenderer:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20AppIconGeneratorCore0ab3SetC0C12iconRendererAcA0bG0_p_tcfc">init(iconRenderer:)</a>
+                    <a class="token" href="#/s:10AppIconKit0aB12SetGeneratorC12iconRendererAcA0bG0_p_tcfc">init(iconRenderer:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -119,9 +127,9 @@ file, given and <code><a href="../Protocols/IconRenderer.html">IconRenderer</a><
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20AppIconGeneratorCore0ab3SetC0C06createabE02in10Foundation3URLVAH_tKF"></a>
-                    <a name="//apple_ref/swift/Method/createAppIconSet(in:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20AppIconGeneratorCore0ab3SetC0C06createabE02in10Foundation3URLVAH_tKF">createAppIconSet(in:)</a>
+                    <a name="/s:10AppIconKit0aB12SetGeneratorC06createabD02in3for10Foundation3URLVAI_AA0aB6IdiomsVtKF"></a>
+                    <a name="//apple_ref/swift/Method/createAppIconSet(in:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10AppIconKit0aB12SetGeneratorC06createabD02in3for10Foundation3URLVAI_AA0aB6IdiomsVtKF">createAppIconSet(in:for:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -144,7 +152,7 @@ However, unreferenced image files might be left around – so you might want to 
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
-<span class="kd">public</span> <span class="kd">func</span> <span class="nf">createAppIconSet</span><span class="p">(</span><span class="k">in</span> <span class="nv">directory</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">URL</span></code></pre>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">createAppIconSet</span><span class="p">(</span><span class="k">in</span> <span class="nv">directory</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="k">for</span> <span class="nv">idioms</span><span class="p">:</span> <span class="kt"><a href="../Structs/AppIconIdioms.html">AppIconIdioms</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">all</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">URL</span></code></pre>
 
                         </div>
                       </div>
@@ -164,6 +172,18 @@ However, unreferenced image files might be left around – so you might want to 
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>idioms</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Generate icons for iPhone, iPad or both? Defaults to both. That is, <code>all</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -179,7 +199,7 @@ However, unreferenced image files might be left around – so you might want to 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="http://skagedal.tech" target="_blank" rel="external">Simon Kågedal Reimer</a>. All rights reserved. (Last updated: 2018-08-21)</p>
+          <p>&copy; 2018 <a class="link" href="http://skagedal.tech" target="_blank" rel="external">Simon Kågedal Reimer</a>. All rights reserved. (Last updated: 2018-08-22)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -1,6 +1,33 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/simon/code/appicon-generator/Sources/AppIconKit/AppIconSetGenerator.swift",
+      "line": 39,
+      "symbol": "AppIconIdioms",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/simon/code/appicon-generator/Sources/AppIconKit/AppIconSetGenerator.swift",
+      "line": 46,
+      "symbol": "AppIconIdioms.iPhone",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/simon/code/appicon-generator/Sources/AppIconKit/AppIconSetGenerator.swift",
+      "line": 47,
+      "symbol": "AppIconIdioms.iPad",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/simon/code/appicon-generator/Sources/AppIconKit/AppIconSetGenerator.swift",
+      "line": 48,
+      "symbol": "AppIconIdioms.all",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/simon/code/appicon-generator"
 }

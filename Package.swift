@@ -6,9 +6,9 @@ let package = Package(
     name: "appicon-generator",
     products: [
         .library(
-            name: "AppIconGeneratorCore",
+            name: "AppIconKit",
             type: .static,
-            targets: ["AppIconGeneratorCore"]
+            targets: ["AppIconKit"]
         ),
        .executable(
            name: "appicon-generator",
@@ -17,9 +17,9 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "AppIconGeneratorCore"),
+            name: "AppIconKit"),
        .target(
            name: "appicon-generator",
-           dependencies: ["AppIconGeneratorCore"])
+           dependencies: ["AppIconKit"])
     ]
 )

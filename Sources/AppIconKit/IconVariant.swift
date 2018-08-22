@@ -5,12 +5,12 @@
 import Foundation
 
 internal struct IconVariant {
-    let idiom: AppIconIdiom
+    let idiom: StoredAppIconIdiom
     let sizeInPoints: String
     let scale: AppIconScale
 }
 
-internal enum AppIconIdiom: String, Codable {
+internal enum StoredAppIconIdiom: String, Codable {
     case iphone = "iphone"
     case ipad = "ipad"
     case iosMarketing = "ios-marketing"
@@ -50,7 +50,7 @@ extension IconVariant {
 
 internal struct AppIconSetImage: Encodable {
     let size: String
-    let idiom: AppIconIdiom
+    let idiom: StoredAppIconIdiom
     let filename: String
     let scale: AppIconScale
 }

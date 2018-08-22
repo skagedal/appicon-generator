@@ -31,4 +31,4 @@ To build the tool, use `swift build`.  Make sure to have your `xcode-select` ver
 
 This repository also contains the app icon set generator code as a Swift Package Manager distributed framework, if you'd like to integrate it with other tools. Please see:
 
-* [AppIconGeneratorCore](http://skagedal.github.io/appicon-generator/)
+* [AppIconKit](http://skagedal.github.io/appicon-generator/)

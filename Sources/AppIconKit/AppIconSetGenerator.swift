@@ -36,6 +36,31 @@ public protocol IconRenderer {
     func renderPNG(sizeInPixels: Int) throws -> Data
 }
 
+public struct AppIconIdioms: OptionSet {
+    public let rawValue: Int
+    
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+    
+    public static let iPhone = AppIconIdioms(rawValue: 1 << 0)
+    public static let iPad = AppIconIdioms(rawValue: 1 << 1)
+    public static let all: AppIconIdioms = [.iPhone, iPad]
+}
+
+internal extension StoredAppIconIdiom {
+    func matches(_ idioms: AppIconIdioms) -> Bool {
+        switch self {
+        case .ipad:
+            return idioms.contains(.iPad)
+        case .iphone:
+            return idioms.contains(.iPhone)
+        case .iosMarketing:
+            return true
+        }
+    }
+}
+
 /// Use `AppIconSetGenerator` to generate a complete set of app icons, including the Contents.json
 /// file, given and `IconRenderer`.
 ///
@@ -53,15 +78,18 @@ public class AppIconSetGenerator {
     /// However, unreferenced image files might be left around – so you might want to just check for any existing
     /// `AppIcon.appiconset` and delete it first if that's what you want.
     ///
-    /// - Parameter directory: The `AppIcon.appiconset` will be placed here.
+    /// - Parameters:
+    ///   - directory: The `AppIcon.appiconset` will be placed here.
+    ///   - idioms: Generate icons for iPhone, iPad or both? Defaults to both. That is, `all`.
     /// - Returns: The URL of the created `AppIcon.appiconset`.
     /// - Throws: Any file management errors or rethrown errors from your `IconRenderer`.
     @discardableResult
-    public func createAppIconSet(in directory: URL) throws -> URL {
+    public func createAppIconSet(in directory: URL, for idioms: AppIconIdioms = .all) throws -> URL {
         let iconsetDirectory = try createdIconSetDirectory(at: directory.appendingPathComponent("AppIcon.appiconset"))
         let baseFilename = "icon"
-        try writeContentsJson(from: allVariants, baseFilename: baseFilename, to: iconsetDirectory.appendingPathComponent("Contents.json"))
-        try writeUniqueIcons(from: allVariants, baseFilename: baseFilename, in: iconsetDirectory)
+        let variants = allVariants.filter { $0.idiom.matches(idioms) }
+        try writeContentsJson(from: variants, baseFilename: baseFilename, to: iconsetDirectory.appendingPathComponent("Contents.json"))
+        try writeUniqueIcons(from: variants, baseFilename: baseFilename, in: iconsetDirectory)
         return iconsetDirectory
     }
     
