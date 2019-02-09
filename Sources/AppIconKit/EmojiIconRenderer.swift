@@ -10,6 +10,8 @@ public class EmojiIconRenderer: IconRenderer {
     public enum Error: Swift.Error {
         /// Creation of bitmap failed for some reason.
         case couldNotCreateBitmapImage
+        /// Creation of graphics context failed for some reason.
+        case couldNotCreateGraphicsContext
         /// Rendering into PNG failed for some reason.
         case couldNotCreatePNGRepresentation
     }
@@ -35,15 +37,29 @@ public class EmojiIconRenderer: IconRenderer {
     /// - Returns: PNG.
     /// - Throws: May throw one of the `EmojiIconRenderer.Error` errors. 
     public func renderPNG(sizeInPixels: Int) throws -> Data {
-        guard let imageRep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: sizeInPixels, pixelsHigh: sizeInPixels, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .calibratedRGB, bytesPerRow: 0, bitsPerPixel: 0) else {
+        guard let imageRep = NSBitmapImageRep(standardSquareBitmapWith: sizeInPixels) else {
             throw Error.couldNotCreateBitmapImage
         }
-        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: imageRep)
+        guard let graphicsContext = NSGraphicsContext(bitmapImageRep: imageRep) else {
+            throw Error.couldNotCreateGraphicsContext
+        }
+        NSGraphicsContext.current = graphicsContext
+
+        render(in: graphicsContext)
         
+        guard let data = imageRep.representation(using: .png, properties: [:]) else {
+            throw Error.couldNotCreatePNGRepresentation
+        }
+        return data
+    }
+    
+    private func render(in context: NSGraphicsContext) {
+        let cgContext = context.cgContext
         let string = text as NSString
         
-        let width = CGFloat(sizeInPixels)
-        let imageSize = NSSize(width: width, height: width)
+        let width = CGFloat(cgContext.width)
+        let height = CGFloat(cgContext.height)
+        let imageSize = NSSize(width: width, height: height)
         let font = NSFont.systemFont(ofSize: width * 0.843)
         let attributes: [NSAttributedString.Key : Any] = [.font: font]
         
@@ -56,11 +72,6 @@ public class EmojiIconRenderer: IconRenderer {
                                width: rect.width,
                                height: rect.height),
                     withAttributes: attributes)
-        
-        guard let data = imageRep.representation(using: .png, properties: [:]) else {
-            throw Error.couldNotCreatePNGRepresentation
-        }
-        return data
     }
 }
 
