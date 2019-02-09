@@ -16,6 +16,16 @@ Now you have an elephant as an appicon. _Nice._
 
 ## Installation
 
+### Mint
+
+Using the [Mint package manager](https://github.com/yonaskolb/Mint):
+
+```shell
+$ mint install skagedal/appicon-generator
+```
+
+### Manually
+
 Grab the zip from the releases page on Github, unzip and move `appicon-generator` into `/usr/local/bin` (or some other place you like to keep your binaries). 
 
 ## Caveats
@@ -25,7 +35,7 @@ Grab the zip from the releases page on Github, unzip and move `appicon-generator
 
 ## Build instructions
 
-To build the tool, use `swift build`.  Make sure to have your `xcode-select` version to Xcode 10 – as of this writing, I am using the beta 6 version. 
+To build the tool, use `swift build`.  Make sure to have your `xcode-select` version to at least Xcode 10.0.
 
 ## Framework
 
