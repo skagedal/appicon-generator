@@ -15,6 +15,10 @@ let package = Package(
            targets: ["appicon-generator"]
        )
     ],
+    dependencies: [
+        // Adding SwiftLint as a dependency lets us do `swift run swiftlint`.
+        .package(url: "https://github.com/Realm/SwiftLint", from: "0.28.1")
+    ],
     targets: [
         .target(
             name: "AppIconKit"
