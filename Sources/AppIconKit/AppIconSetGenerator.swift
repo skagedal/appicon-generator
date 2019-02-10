@@ -1,7 +1,3 @@
-//
-//  Created by Simon Kågedal Reimer on 2018-06-10.
-//
-
 import Foundation
 
 private let allVariants: [IconVariant] = [

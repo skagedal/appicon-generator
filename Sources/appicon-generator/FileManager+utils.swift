@@ -1,7 +1,3 @@
-//
-//  Created by Simon Kågedal Reimer on 2018-08-19.
-//
-
 import Foundation
 
 extension FileManager {

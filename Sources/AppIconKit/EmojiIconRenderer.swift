@@ -1,7 +1,3 @@
-//
-//  Created by Simon Kågedal Reimer on 2018-06-09.
-//
-
 import Cocoa
 
 /// A class to render emoji icons.

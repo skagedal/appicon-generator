@@ -1,7 +1,3 @@
-//
-//  Created by Simon Kågedal Reimer on 2018-08-18.
-//
-
 import Foundation
 
 internal struct IconVariant {

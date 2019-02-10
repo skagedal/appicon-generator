@@ -1,7 +1,3 @@
-//
-//  Created by Simon Kågedal Reimer on 2018-08-22.
-//
-
 import Cocoa
 
 extension NSBitmapImageRep {
