@@ -1,3 +1,7 @@
+//
+//  Copyright © 2019 Simon Kågedal Reimer. See LICENSE.
+//
+
 import Cocoa
 
 /// A class to render emoji icons.

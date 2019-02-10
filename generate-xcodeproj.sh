@@ -11,15 +11,17 @@
 
 swift package generate-xcodeproj 
 
-# Set header template.  We would like no header at all, but Xcode will not let us do that.
+# Set header template.
 
-cat > appicon-generator.xcodeproj/xcshareddata/IDETemplateMacros.plist <<EOF
+sed s/CURRENTYEAR/`date +%Y`/g > appicon-generator.xcodeproj/xcshareddata/IDETemplateMacros.plist <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>FILEHEADER</key>
-	<string><# Remove me #></string>
+	<string>
+//  Copyright © CURRENTYEAR Simon Kågedal Reimer. See LICENSE.
+//</string>
 </dict>
 </plist>
 EOF
