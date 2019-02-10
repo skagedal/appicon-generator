@@ -7,18 +7,14 @@ private func parse(_ arguments: [String]) throws -> ProcessArguments {
 }
 
 class ProcessArgumentParserTest: XCTestCase {
-    func testFailedParsing() throws {
-        // Actually if there isn't even one element (the script name) in the array it's more of a programmer error / fatal error
-        XCTAssertThrowsError(try parse([]), "Should throw error")
-        XCTAssertThrowsError(try parse([""]), "Should throw error")
-    }
-    
     func testSimpleParsing() throws {
         let p = try parse(["", "😺"])
         XCTAssertEqual(p.drawingCommands, [DrawingCommand.emoji(text: "😺")])
         // When no idiom is passed, we expect both
         XCTAssertTrue(p.idioms.contains(AppIconIdioms.iPad))
         XCTAssertTrue(p.idioms.contains(AppIconIdioms.iPhone))
+        XCTAssertFalse(p.showHelp)
+        XCTAssertFalse(p.showVersion)
     }
     
     func testIpadParsing() throws {
@@ -35,4 +31,13 @@ class ProcessArgumentParserTest: XCTestCase {
         XCTAssertTrue(p.idioms.contains(AppIconIdioms.iPhone))
     }
 
+    func testHelpAndVersion() throws {
+        let help = try parse(["", "--help"])
+        XCTAssertTrue(help.showHelp)
+        XCTAssertFalse(help.showVersion)
+        
+        let version = try parse(["", "--version"])
+        XCTAssertTrue(version.showVersion)
+        XCTAssertFalse(version.showHelp)
+    }
 }

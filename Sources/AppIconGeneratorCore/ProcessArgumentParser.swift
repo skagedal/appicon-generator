@@ -4,16 +4,8 @@ import AppIconKit
 public struct ProcessArguments {
     public private(set) var idioms: AppIconIdioms = []
     public private(set) var drawingCommands: [DrawingCommand] = []
-
-    public init(arguments: [String]) throws {
-        guard !arguments.isEmpty else {
-            throw Error.commandsMissing
-        }
-        var slice = arguments[1...]
-
-        self.idioms = try parseGlobalArguments(&slice)
-        self.drawingCommands = try parseDrawingCommands(&slice)
-    }
+    public private(set) var showHelp = false
+    public private(set) var showVersion = false
 
     public enum Error: LocalizedError {
         case commandsMissing
@@ -29,39 +21,34 @@ public struct ProcessArguments {
         }
     }
 
-    private func parseGlobalArguments(_ slice: inout ArraySlice<String>) throws -> AppIconIdioms {
-        var idioms: AppIconIdioms = []
+    public init(arguments: [String]) throws {
+        try parse(arguments)
+    }
 
-        while let argument = slice.first, argument.starts(with: "--") {
-            slice.removeFirst()
+    private typealias TokenIterator = IndexingIterator<ArraySlice<String>>
+
+    private mutating func parse(_ arguments: [String]) throws {
+        var parsedIdioms: AppIconIdioms = []
+        var iterator = arguments.dropFirst().makeIterator()
+        while let argument = iterator.next() {
             switch argument {
             case "--ipad":
-                idioms = idioms.union([AppIconIdioms.iPad])
-
+                parsedIdioms = parsedIdioms.union(.iPad)
             case "--iphone":
-                idioms = idioms.union([AppIconIdioms.iPhone])
-
+                parsedIdioms = parsedIdioms.union(.iPhone)
+            case "--help":
+                showHelp = true
+            case "--version":
+                showVersion = true
             default:
-                throw Error.unknownGlobalOption(argument)
+                drawingCommands.append(try parseDrawingCommand(argument, &iterator))
             }
         }
 
-        return idioms.rawValue == 0 ? AppIconIdioms.all : idioms
+        idioms = parsedIdioms.isEmpty ? .all : parsedIdioms
     }
 
-    private func parseDrawingCommands(_ slice: inout ArraySlice<String>) throws -> [DrawingCommand] {
-        guard let firstCommand = slice.popFirst() else {
-            throw Error.commandsMissing
-        }
-
-        var commands: [DrawingCommand] = [try parseDrawingCommand(firstCommand, &slice)]
-        while let command = slice.popFirst() {
-            commands += [try parseDrawingCommand(command, &slice)]
-        }
-        return commands
-    }
-
-    private func parseDrawingCommand(_ command: String, _ slice: inout ArraySlice<String>) throws -> DrawingCommand {
+    private func parseDrawingCommand(_ command: String, _ iterator: inout TokenIterator) throws -> DrawingCommand {
         return DrawingCommand.emoji(text: command)
     }
 }
