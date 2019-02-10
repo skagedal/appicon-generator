@@ -8,13 +8,13 @@ public struct ProcessArguments {
 
 public class ProcessArgumentParser {
     public init() {
-        
+
     }
-    
+
     public enum Error: LocalizedError {
         case commandsMissing
         case unknownGlobalOption(String)
-        
+
         public var errorDescription: String? {
             switch self {
             case .commandsMissing:
@@ -30,13 +30,13 @@ public class ProcessArgumentParser {
             throw Error.commandsMissing
         }
         var slice = arguments[1...]
-        
+
         let idioms = try parseGlobalArguments(&slice)
         let drawingCommands = try parseDrawingCommands(&slice)
 
         return ProcessArguments(idioms: idioms, drawingCommands: drawingCommands)
     }
-    
+
     private func parseGlobalArguments(_ slice: inout ArraySlice<String>) throws -> AppIconIdioms {
         var idioms: AppIconIdioms = []
 
@@ -56,19 +56,19 @@ public class ProcessArgumentParser {
 
         return idioms.rawValue == 0 ? AppIconIdioms.all : idioms
     }
-    
+
     private func parseDrawingCommands(_ slice: inout ArraySlice<String>) throws -> [DrawingCommand] {
         guard let firstCommand = slice.popFirst() else {
             throw Error.commandsMissing
         }
-        
+
         var commands: [DrawingCommand] = [try parseDrawingCommand(firstCommand, &slice)]
         while let command = slice.popFirst() {
             commands += [try parseDrawingCommand(command, &slice)]
         }
         return commands
     }
-    
+
     private func parseDrawingCommand(_ command: String, _ slice: inout ArraySlice<String>) throws -> DrawingCommand {
         return DrawingCommand.emoji(text: command)
     }

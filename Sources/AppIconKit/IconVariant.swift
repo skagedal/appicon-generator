@@ -40,7 +40,7 @@ extension IconVariant {
         // Ugh.
         return Int(round(scale.number * CGFloat(Double(sizeInPoints)!)))
     }
-    
+
     func filename(base: String) -> String {
         return "\(base)-\(sizeInPixels).png"
     }
@@ -69,7 +69,7 @@ extension AppIconSet {
     init(baseFilename: String, variants: [IconVariant]) {
         self = AppIconSet(images: variants.map({ variant in
             let points = "\(variant.sizeInPoints)"
-            
+
             return AppIconSetImage(size: "\(points)x\(points)",
                                    idiom: variant.idiom,
                                    filename: variant.filename(base: baseFilename), scale: variant.scale)

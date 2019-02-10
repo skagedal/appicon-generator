@@ -20,7 +20,7 @@ public class EmojiIconRenderer: IconRenderer {
     let text: String
     /// Background color to render.
     let backgroundColor: NSColor
-    
+
     /// Create an Emoji icon renderer.
     ///
     /// - Parameters:
@@ -30,7 +30,7 @@ public class EmojiIconRenderer: IconRenderer {
         self.text = text
         self.backgroundColor = backgroundColor
     }
-    
+
     /// Renders the specified emoji icon.
     ///
     /// - Parameter sizeInPixels: Width/height.
@@ -46,25 +46,25 @@ public class EmojiIconRenderer: IconRenderer {
         NSGraphicsContext.current = graphicsContext
 
         render(in: graphicsContext)
-        
+
         guard let data = imageRep.representation(using: .png, properties: [:]) else {
             throw Error.couldNotCreatePNGRepresentation
         }
         return data
     }
-    
+
     private func render(in context: NSGraphicsContext) {
         let cgContext = context.cgContext
         let string = text as NSString
-        
+
         let width = CGFloat(cgContext.width)
         let height = CGFloat(cgContext.height)
         let imageSize = NSSize(width: width, height: height)
         let font = NSFont.systemFont(ofSize: width * 0.843)
-        let attributes: [NSAttributedString.Key : Any] = [.font: font]
-        
+        let attributes: [NSAttributedString.Key: Any] = [.font: font]
+
         let rect = string.boundingRect(with: imageSize, options: [], attributes: attributes)
-        
+
         backgroundColor.setFill()
         NSRect(x: 0, y: 0, width: width, height: width).fill()
         string.draw(in: NSRect(x: width / 2 - rect.width / 2,
@@ -74,5 +74,3 @@ public class EmojiIconRenderer: IconRenderer {
                     withAttributes: attributes)
     }
 }
-
-
