@@ -19,9 +19,8 @@ func run(with arguments: ProcessArguments) throws {
     print("Icon set generated: \(appIconSetDirectory.relativePath)")
 }
 
-let parser = ProcessArgumentParser()
 do {
-    let arguments = try parser.parse(ProcessInfo.processInfo.arguments)
+    let arguments = try ProcessArguments(arguments: CommandLine.arguments)
     try run(with: arguments)
 } catch {
     print(error.localizedDescription)

@@ -2,13 +2,17 @@ import AppKit
 import AppIconKit
 
 public struct ProcessArguments {
-    public let idioms: AppIconIdioms
-    public let drawingCommands: [DrawingCommand]
-}
+    public private(set) var idioms: AppIconIdioms = []
+    public private(set) var drawingCommands: [DrawingCommand] = []
 
-public class ProcessArgumentParser {
-    public init() {
+    public init(arguments: [String]) throws {
+        guard !arguments.isEmpty else {
+            throw Error.commandsMissing
+        }
+        var slice = arguments[1...]
 
+        self.idioms = try parseGlobalArguments(&slice)
+        self.drawingCommands = try parseDrawingCommands(&slice)
     }
 
     public enum Error: LocalizedError {
@@ -23,18 +27,6 @@ public class ProcessArgumentParser {
                 return "Unknown global option: \(string)"
             }
         }
-    }
-
-    public func parse(_ arguments: [String]) throws -> ProcessArguments {
-        guard !arguments.isEmpty else {
-            throw Error.commandsMissing
-        }
-        var slice = arguments[1...]
-
-        let idioms = try parseGlobalArguments(&slice)
-        let drawingCommands = try parseDrawingCommands(&slice)
-
-        return ProcessArguments(idioms: idioms, drawingCommands: drawingCommands)
     }
 
     private func parseGlobalArguments(_ slice: inout ArraySlice<String>) throws -> AppIconIdioms {
