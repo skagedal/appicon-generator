@@ -16,8 +16,9 @@ let package = Package(
        )
     ],
     dependencies: [
-        // Adding SwiftLint as a dependency lets us do `swift run swiftlint`.
-        .package(url: "https://github.com/Realm/SwiftLint", from: "0.28.1")
+        // Adding tools as a dependencies lets us do `swift run swiftlint`.
+        .package(url: "https://github.com/Realm/SwiftLint", from: "0.28.1"),
+        .package(url: "https://github.com/skagedal/xcodeproj-modify", from: "1.0.1")
     ],
     targets: [
         .target(

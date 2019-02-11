@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# This script should be run to generate the Xcode project.  Unfortunately, some steps I haven't
-# yet figured out a good way to automate, so there will be some instructions printed.
+# This script should be run to generate the Xcode project.
 
 # Update Version.swift
 
@@ -26,13 +25,7 @@ sed s/CURRENTYEAR/`date +%Y`/g > appicon-generator.xcodeproj/xcshareddata/IDETem
 </plist>
 EOF
 
-# Show add build phase info
+# Add build phase
 
-cat <<EOF
-Done.
+swift run xcodeproj-modify ./appicon-generator.xcodeproj add-run-script-phase appicon-generator ./xcode-build-phase.sh
 
-You need to do one more thing yourself.  Open Xcode project settings and add a new Build Phase for the
-appicon-generator target.  It should be a Run Script phase and it should contain this line:
-
-./xcode-build-phase.sh
-EOF
