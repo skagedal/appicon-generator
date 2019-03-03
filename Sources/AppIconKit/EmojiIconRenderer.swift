@@ -50,6 +50,7 @@ public class EmojiIconRenderer: IconRenderer {
         guard let data = imageRep.representation(using: .png, properties: [:]) else {
             throw Error.couldNotCreatePNGRepresentation
         }
+
         return data
     }
 

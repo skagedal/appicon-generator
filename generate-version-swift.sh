@@ -8,7 +8,7 @@ cat > ./Sources/AppIconGeneratorCore/Version.swift <<EOF
 // Should not be under version control.
 //
 
-public enum AppIconGenerator {
+public extension AppIconGenerator {
     static var version: String {
         return "${version}"
     }

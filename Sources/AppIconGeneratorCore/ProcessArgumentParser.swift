@@ -12,13 +12,10 @@ public struct ProcessArguments {
     public private(set) var showVersion = false
 
     public enum Error: LocalizedError {
-        case commandsMissing
         case unknownGlobalOption(String)
 
         public var errorDescription: String? {
             switch self {
-            case .commandsMissing:
-                return "Give at least one drawing command."
             case .unknownGlobalOption(let string):
                 return "Unknown global option: \(string)"
             }
