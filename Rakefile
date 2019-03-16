@@ -49,7 +49,7 @@ EOF
 end
 
 def write_dot_version(version)
-    File.write(DOT_VERSION, version)
+    File.write(DOT_VERSION, "#{version}\n")
 end
 
 def abort(message)
