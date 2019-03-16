@@ -25,7 +25,17 @@ sed s/CURRENTYEAR/`date +%Y`/g > appicon-generator.xcodeproj/xcshareddata/IDETem
 </plist>
 EOF
 
+# Here would like to run add the SwiftLint build phase but despite creating this tool, it doesn't quite work the way I want 
+# to.  If we just run it directly, we will for some reason get no schemes in the Xcode project.  We have to first open
+# the Xcode project, then run this tool.  If anyone have suggestions for how to deal with all this in a better way, please
+# contact me. 
+
+# ACTUALLY:
+# What we should do is save the scheme files before running the xcodeproj-modify tool, and then restore them afterwards.
+# Until we find out something better.
+
+echo Please open appicon-generator.xcodeproj in Xcode, then run ./add-build-phase.sh
 # Add build phase
 
-swift run xcodeproj-modify ./appicon-generator.xcodeproj add-run-script-phase appicon-generator ./xcode-build-phase.sh
+# xcodebuild
 
