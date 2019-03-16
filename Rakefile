@@ -28,7 +28,7 @@ task :release, [:version] do |t, args|
     puts "Setting version number #{version}"
     write_version_swift(version)
     write_dot_version(version)
-    system('git', 'commit', '-a', '-m', version)
+    system('git', 'commit', '-a', '-m', "Release #{version}")
     system('git', 'tag', '-a', version, '-m', version)
 end
 
