@@ -1,44 +1,26 @@
 # appicon-generator
 
-*A tool to quickly generate snazzy iOS placeholder appicons!*
+**This repository has moved.** `appicon-generator` now lives in the
+[skagedal-tools](https://github.com/skagedal/skagedal-tools) monorepo, under
+[`appicon-generator/`](https://github.com/skagedal/skagedal-tools/tree/main/appicon-generator).
+Its history came along, with the paths rewritten, so `git log` there goes back
+to the first commit here.
 
-If you're an iOS developer like me, chances are that you also create tiny iOS app projects in Xcode all the time. Maybe it's an idea you'd like to try out, a toy for experimenting with a new iOS feature, maybe it's a micro-tool, maybe it's the alpha version of the next App Store blockbuster. 
+The version in skagedal-tools is a substantial rewrite: Swift 6.2 instead of
+Swift 4, the single-size app icon set Xcode 14 and later produce (with the iOS
+18 dark and tinted variants), and modes for Flutter apps and bare PNGs
+alongside native Xcode projects.
 
-Suddenly your iOS simulators and your phone has a whole bunch of apps with the placeholder icon. That's not very nice. But – making an icon, just for this? You don't have time for that. You're not a designer.  You don't have Sketch. You just want something that looks ok for now. 
+## Installing
 
-Here's a tool that quickly generates app icons from a big set of beautifully crafted icons that are already on your computer.  Open a shell, `cd` to your project directory and type:
-
-```shell
-$ appicon-generator 🐘
-```
-
-Now you have an elephant as an appicon. _Nice._
-
-## Installation
-
-### Mint
-
-Using the [Mint package manager](https://github.com/yonaskolb/Mint):
+The Mint and release-zip instructions that used to be here no longer apply —
+there are no tagged releases any more. Clone skagedal-tools and run:
 
 ```shell
-$ mint install skagedal/appicon-generator
+$ ./install appicon-generator
 ```
 
-### Manually
+which builds it and puts the binary in `~/.local/bin`.
 
-Grab the zip from the releases page on Github, unzip and move `appicon-generator` into `/usr/local/bin` (or some other place you like to keep your binaries). 
-
-## Caveats
-
-* `appicon-generator` will look for an `Assets.xcassets` directory, in the directory you're at or most one level down, and then generate an `AppIcon.appiconset` there, **overwriting any existing data without asking**. Commit your data if needed before using.
-* Obviously, don't try to commit an app with an emoji as an icon to the App Store. They won't like that. 
-
-## Build instructions
-
-To build the tool, use `swift build`.  Make sure to have your `xcode-select` version to at least Xcode 10.0.
-
-## Framework
-
-This repository also contains the app icon set generator code as a Swift Package Manager distributed framework, if you'd like to integrate it with other tools. Please see:
-
-* [AppIconKit](http://skagedal.github.io/appicon-generator/)
+This repository is kept only so existing links resolve. Nothing further will
+be developed here.
